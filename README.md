@@ -1,24 +1,61 @@
-# Restaurante frontend
+# Restaurante Frontend (pr2-f)
 
-Repositorio del frontend del sistema de restaurante. Carpeta hermana del backend: `../pr2-bnd`.
+Sistema de frontend interactivo para gestión de restaurante académico, construido con **Vue 3, TypeScript, Vite, Vue Router y Pinia**.
 
-Estado: preparación inicial de Git. La aplicación todavía no está implementada y no hay remoto configurado.
+Conectado en tiempo real con la API REST y SignalR Hub del backend (`pr2-bnd`).
 
-La referencia recibida es `Especificacion_y_prompts_restaurante.docx`, versión 1 del 9 de septiembre de 2026. Propone Vue 3, TypeScript, Vite, Vue Router, Pinia y el cliente oficial de SignalR. Los prompts del documento son etapas propuestas; no constituyen ejecuciones realizadas.
+## 🚀 Tecnologías
 
-La interfaz prevista estará en español, con importes en quetzales y vistas para mesero, cocina, cajero y administrador. Los contratos se definirán en el backend antes de integrar las pantallas. El token de acceso se conservará únicamente en memoria.
+- **Vue 3** (Composition API, `<script setup lang="ts">`)
+- **TypeScript** (Tipado estricto)
+- **Pinia** (Gestión de estado global y sincronización API)
+- **Vite** (Build tool y servidor de desarrollo)
+- **@microsoft/signalr** (Notificaciones y eventos en tiempo real)
 
-## Conectar un remoto posteriormente
+## 🔐 Autenticación y Seguridad
 
-Crear un repositorio remoto vacío y ejecutar desde esta carpeta, sustituyendo URL_FRONTEND por su dirección:
+- **Token JWT en memoria**: Conforme a la arquitectura del sistema, el token de autenticación se conserva exclusivamente en memoria.
+- **Roles soportados**:
+  - `Admin`: Gestión completa (mesas, menú, pedidos, cobros).
+  - `Waiter`: Apertura de cuentas, creación de pedidos, entrega.
+  - `Kitchen`: Visualización de comanda y cambio de estados (En preparación, Listo).
+  - `Cashier`: Registro de pagos y cierre de cuentas.
 
-```sh
-git remote add origin URL_FRONTEND
-git push -u origin main
+## 🛠️ Ejecución Local
+
+### Prerrequisitos
+- Node.js 20+ y npm.
+- Backend en ejecución en `http://localhost:5214` (repositorio hermano `pr2-bnd`).
+
+### Comandos
+
+```bash
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
+npm run dev
+
+# Compilación de producción y typecheck
+npm run build
+
+# Pruebas unitarias
+npm test
 ```
 
-Si el remoto ya contiene código, clonarlo en otra carpeta y revisar cómo integrar ambos historiales. No sobrescribir esta carpeta ni forzar un push.
+El servidor Vite levantará en `http://localhost:5173` (o `http://127.0.0.1:5175`).
 
-## Instrucciones y trazabilidad
+## 🔗 Endpoints consumidos mediante Proxy Vite
 
-P00 aplicado. Consultar [AGENTS.md](AGENTS.md), la [especificación](docs/specification/README.md) y la [bitácora](docs/ai-prompts/INDEX.md). La siguiente etapa es P01, pendiente de solicitud.
+- `POST /api/v1/auth/login`: Autenticación de usuarios.
+- `GET /api/v1/tables`: Lista de mesas y estado.
+- `GET /api/v1/menu-items`: Catálogo de platillos.
+- `POST /api/v1/sessions`: Apertura de cuentas por mesa.
+- `POST /api/v1/sessions/{id}/orders`: Envío de pedidos a cocina.
+- `POST /api/v1/orders/{id}/(start|ready|deliver|cancel)`: Flujo de cocina y entrega.
+- `POST /api/v1/sessions/{id}/payments`: Registro de pagos con vuelto.
+- `WS /hubs/restaurant`: Suscripción SignalR a eventos del restaurante.
+
+## 📁 Repositorios
+- Frontend: [https://github.com/Emersonx257/pr2-f](https://github.com/Emersonx257/pr2-f)
+- Backend: [https://github.com/Emersonx257/pr2-bnd](https://github.com/Emersonx257/pr2-bnd)
