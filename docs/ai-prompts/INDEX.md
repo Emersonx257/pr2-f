@@ -10,3 +10,5 @@ Cada entrada conserva el mensaje literal; el catálogo del documento no sustituy
 P01 a P14: propuestos, no ejecutados. ORIG-001: transcripción previa no disponible; pendiente antes de entrega final. Revisión humana pendiente.
 
 Índice general: [backend](../../../pr2-bnd/docs/ai-prompts/INDEX.md).
+
+[Evidencia posterior y commits de P00](20260909-002-evidencia.md).
