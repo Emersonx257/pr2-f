@@ -18,3 +18,7 @@ git push -u origin main
 ```
 
 Si el remoto ya contiene código, clonarlo en otra carpeta y revisar cómo integrar ambos historiales. No sobrescribir esta carpeta ni forzar un push.
+
+## Instrucciones y trazabilidad
+
+P00 aplicado. Consultar [AGENTS.md](AGENTS.md), la [especificación](docs/specification/README.md) y la [bitácora](docs/ai-prompts/INDEX.md). La siguiente etapa es P01, pendiente de solicitud.
